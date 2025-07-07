@@ -1,59 +1,53 @@
-<?php 
+<?php
+session_start(); 
 include("../connect.php");
 
-$name   = $_POST["name"];
-$price  = $_POST["price"];
-$sale = $_POST["sale"];
+$name        = $_POST["name"];
+$price       = $_POST["price"];
+$sale        = $_POST["sale"];
 $description = $_POST["description"];
-$category  = $_POST["category"];
+$category    = $_POST["category"];
+$images      = $_FILES["img"];
+$extension     = ["jpg", "jpeg", "png", "gif"];
 
-// echo "<pre>";
-// print_r ($_FILES);
-
-$imgName=$_FILES["img"]["name"];
-$tempName=$_FILES["img"]["tmp_name"];
+$errors = [];
+$old = $_POST;
 
 
-if($_FILES["img"]["error"] ==0){
+if (empty($name))        $errors['name'] = "الاسم مطلوب";
+if (empty($price))       $errors['price'] = "السعر مطلوب";
+if (empty($sale))        $errors['sale'] = "قيمة الخصم مطلوبة";
+if (empty($description)) $errors['description'] = "الوصف مطلوب";
+if (empty($category))    $errors['category'] = "يرجى اختيار تصنيف";
+if (empty($images['name'][0])) $errors['img'] = "يجب رفع صورة واحدة على الأقل";
 
-    $extentions=["jpg","png","jif","jpeg"];
-    $ext =pathinfo($imgName ,PATHINFO_EXTENSION);
-
-    if(in_array($ext , $extentions)){
-
-        if($_FILES["img"]["size"] <2000000){
-
-            $newName=md5(uniqid()) ."." . $ext;
-            // echo  $newName;
-            move_uploaded_file($tempName ,"../../images/$newName");
-
-        }else{
-            echo " size error";
-            exit();
-        }
-
-    }else{
-        echo " extention error";
-        exit();
-    }
-}else{
-    echo " file not uploaded";
+if (!empty($errors)) {
+    $_SESSION['errors'] = $errors;
+    $_SESSION['old'] = $old;
+    header("Location: ../../products.php?action=add");
     exit();
 }
 
 
+$insertProduct = "INSERT INTO products (name, price, sale, description, cat_id)
+                    VALUES
+                    ('$name', '$price', '$sale', '$description', '$category')";
+$conn->query($insertProduct);
+$product_id = $conn->insert_id;
 
-$insertData = "INSERT INTO products 
-(name, price, sale, img, description, cat_id)
-VALUES
-('$name', '$price', '$sale', '$newName', '$description', '$category')";
+foreach ($images["name"] as $index => $imgName) {
+    if ($images["error"][$index] === 0) {
+        $ext = strtolower(pathinfo($imgName, PATHINFO_EXTENSION));
+        if (!in_array($ext, $extension)) continue;
+        if ($images["size"][$index] > 2 * 1024 * 1024) continue;
 
-$query=$conn->query($insertData);
+        $newName = md5(uniqid()) . "." . $ext;
+        move_uploaded_file($images["tmp_name"][$index], "../../images/$newName");
 
-if ($query) {
-    header("Location: ../../products.php");
-    exit(); 
-} else {
-    echo  $conn->error;
+        $conn->query("INSERT INTO images (name, product_id) VALUES ('$newName', $product_id)");
+    }
 }
+
+header("Location: ../../products.php");
+exit();
 ?>

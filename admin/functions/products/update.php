@@ -8,18 +8,17 @@ $sale = $_POST["sale"];
 $description = $_POST["description"];
 $category = $_POST["category"];
 
-$img = ""; 
+$images = $_FILES["img"];
+$extensions = ["jpg", "jpeg", "png", "gif"];
 
-if ($_FILES["img"]["error"] == 0) {
-    $allowed = ["jpg", "jpeg", "png", "gif"];
-    $ext = pathinfo($_FILES["img"]["name"], PATHINFO_EXTENSION);
-
-    if (in_array(strtolower($ext), $allowed)) {
-        if ($_FILES["img"]["size"] < 2 * 1024 * 1024) {
-            $newName = md5(uniqid()) . "." . $ext;
-            move_uploaded_file($_FILES["img"]["tmp_name"], "../../images/$newName");
-            $img = ", img = '$newName'";
-        }
+foreach ($images["name"] as $index => $imgName) {
+    if ($images["error"][$index] === 0) {
+        $ext = strtolower(pathinfo($imgName, PATHINFO_EXTENSION));
+        if (!in_array($ext, $extensions)) continue;
+        if ($images["size"][$index] > 2 * 1024 * 1024) continue;
+        $newName = md5(uniqid()) . "." . $ext;
+        move_uploaded_file($images["tmp_name"][$index], "../../images/$newName");
+        $conn->query("INSERT INTO images (name, product_id) VALUES ('$newName', $id)");
     }
 }
 
@@ -29,7 +28,6 @@ $update = "UPDATE products SET
             sale = '$sale',
             description = '$description',
             cat_id = '$category'
-            $img
             WHERE id = $id";
 
 if ($conn->query($update)) {

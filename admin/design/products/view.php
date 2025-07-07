@@ -1,3 +1,5 @@
+
+
 <table class="table table-striped">
     <thead>
         <tr>
@@ -27,7 +29,20 @@
             <td><?=$product["name"]?></td>
             <td><?=$product["price"]?></td>
             <td><?=$product["sale"]?></td>
-            <td><img style="size: 100px;" src="images/<?=$product['img']?>"></td>
+            <td>
+                <div style="display: flex; gap: 5px; flex-wrap: wrap;">
+                <?php
+                    $product_id = $product['id'];
+                    $imgQuery = $conn->query("SELECT name FROM images WHERE product_id = $product_id");
+
+                    if ($imgQuery->num_rows > 0) {
+                        while ($img = $imgQuery->fetch_assoc()) {
+                            echo '<img src="images/' . $img['name'] . '" style="width:50px; height:50px; margin:2px; object-fit:cover;">';
+                        }
+                    }
+                ?>
+            </div>
+            </td>
             <td><?=$product["description"]?></td>
             <td>
                 <?php
