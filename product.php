@@ -1,3 +1,26 @@
+<?php 
+include_once("admin/functions/connect.php");
+
+$limit = 3; 
+$page = isset($_GET['page']) ? $_GET['page'] : 1;
+$offset = ($page - 1) * $limit;
+
+$where = "";
+if (isset($_GET["cat_id"])) {
+    $id = $_GET["cat_id"];
+    $where = "WHERE cat_id = $id";
+}
+$totalQuery = $conn->query("SELECT COUNT(*) as total FROM products $where");
+$totalRow = $totalQuery->fetch_assoc();
+$totalProducts = $totalRow['total'];
+$totalPages = ceil($totalProducts / $limit);
+
+
+$selectProducts = "SELECT * FROM products $where LIMIT $limit OFFSET $offset";
+$query = $conn->query($selectProducts);
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -534,14 +557,6 @@
 					<!-- Product -->
 					<div class="row">
 						<?php 
-						include_once("admin/functions/connect.php");
-						if(isset($_GET["cat_id"])){
-							$id=$_GET["cat_id"];
-                            $selectProducts="SELECT * FROM products WHERE cat_id=$id ";
-						}else{
-							$selectProducts="SELECT * FROM products ";
-						}
-						$query=$conn->query($selectProducts);
 						foreach($query as $product){
 							?>
 							<div class="col-sm-12 col-md-6 col-lg-4 p-b-50">
@@ -591,9 +606,14 @@
 
 					<!-- Pagination -->
 					<div class="pagination flex-m flex-w p-t-26">
-						<a href="#" class="item-pagination flex-c-m trans-0-4 active-pagination">1</a>
-						<a href="#" class="item-pagination flex-c-m trans-0-4">2</a>
-					</div>
+						<?php for ($i = 1; $i <= $totalPages; $i++){ 
+							?>
+							<a href="?page=<?= $i ?><?= isset($_GET['cat_id']) ? '&cat_id=' . $_GET['cat_id'] : '' ?>" 
+							class="item-pagination flex-c-m trans-0-4 <?= ($i == $page) ? 'active-pagination' : '' ?>">
+								<?= $i ?>
+							</a>
+							<?php } ?>
+					</div><!-- Pagination -->
 				</div>
 			</div>
 		</div>

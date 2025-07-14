@@ -1,14 +1,14 @@
 <?php
 session_start();
 
-// $token = $_SESSION['auth_token'] ?? $_COOKIE['auth_token'] ?? null;
+$token = $_SESSION['auth_token'] ?? $_COOKIE['auth_token'] ?? null;
 $role= $_SESSION["role"];
 
 // if(!isset($_SESSION["admin_id"])){
 //         header("Location:login.php");
 // 		exit();
 // 	}
-var_dump($_SESSION);
+// var_dump($_SESSION);
 // if ($role < 300) { 
 //     echo "🚫 غير مسموح لك بالدخول لهذه الصفحة.";
 //     exit;
