@@ -12,28 +12,28 @@ $priv  = $_POST["priv"];
 
 
 if(!empty($_POST["password"])){
-    $updatePass = "UPDATE users  SET password = '$password' WHERE id = $id"; 
+    $updatePass = "UPDATE admins  SET password = '$password' WHERE id = $id"; 
     $queryPass=$conn->query($updatePass);
 
 
 }
 
 
-$updateUser= "UPDATE users 
+$updateAdmin= "UPDATE admins 
                     SET
                     name = '$name',
                     email = '$email',
                     password = '$password',
                     address = '$address',
                     gender = '$gender',
-                    priv = '$priv'
+                    priv_id = '$priv'
                     WHERE id = $id";
 
                 
-$query=$conn->query($updateUser);
+$query=$conn->query($updateAdmin);
 
 if ($query) {
-    header("Location: ../../users.php");
+    header("Location: ../../admins.php");
     exit(); 
 } else {
     echo  $conn->error;

@@ -39,7 +39,8 @@ foreach ($images["name"] as $index => $imgName) {
     if ($images["error"][$index] === 0) {
         $ext = strtolower(pathinfo($imgName, PATHINFO_EXTENSION));
         if (!in_array($ext, $extension)) continue;
-        if ($images["size"][$index] > 2 * 1024 * 1024) continue;
+        $size= 2 * 1024 * 1024;
+        if ($images["size"][$index] > $size) continue;
 
         $newName = md5(uniqid()) . "." . $ext;
         move_uploaded_file($images["tmp_name"][$index], "../../images/$newName");

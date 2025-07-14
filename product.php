@@ -526,7 +526,6 @@
 								</select>
 							</div>
 						</div>
-
 						<span class="s-text8 p-t-5 p-b-5">
 							Showing 1–12 of 16 results
 						</span>
@@ -549,8 +548,15 @@
 								<!-- Block2 -->
 								<div class="block2">
 									<div class="block2-img wrap-pic-w w-50 h-full of-hidden pos-relative block2-labelnew">
-										<img src="admin/images/<?= $product['img']?>" alt="IMG-PRODUCT">
-
+									<?php
+						                include_once("admin/functions/connect.php");
+										$productId=$product["id"];
+										$selectImg="SELECT * FROM images WHERE product_id = $productId  LIMIT 1 ";
+										$queryImg=$conn->query("	$selectImg");
+										$imgProducts=$queryImg->fetch_assoc();
+									
+									?>
+                                        <img src="admin/images/<?= $imgProducts['name']?>" alt="IMG-PRODUCT">
 										<div class="block2-overlay trans-0-4">
 											<a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
 												<i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>

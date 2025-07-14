@@ -17,7 +17,7 @@
 		</form>
 		<ul class="nav menu">
 			<li class="active"><a href="index.php"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a></li>
-			<li><a href="users.php"><em class="fa fa-users">&nbsp;</em> Users</a></li>
+			<li><a href="admins.php"><em class="fa fa-users">&nbsp;</em> admins</a></li>
 			<li><a href="products.php"><em class="fa fa-users">&nbsp;</em>products</a></li>
 			<li><a href="functions/logoutCheck.php"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
 		</ul>

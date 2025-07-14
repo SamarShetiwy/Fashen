@@ -1,9 +1,10 @@
 <?php 
 session_start();
 
-if(isset($_SESSION["login-id"])){
-	header("Location:index.php");
-	exit();
+$token = $_SESSION['auth_token'] ?? $_COOKIE['auth_token'] ?? null;
+if ($token) {
+    header("Location: index.php");
+    exit();
 }
 ?>
 

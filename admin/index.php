@@ -11,7 +11,7 @@
 				<li><a href="#">
 					<em class="fa fa-home"></em>
 				</a></li>
-				<li class="active">Dashboard <?= $_SESSION["login-id"] ?></li>
+				<li class="active">Dashboard <?= $token ?></li>
 			</ol>
 		</div><!--/.row-->
 		
@@ -43,7 +43,7 @@
 					<div class="panel panel-orange panel-widget border-right">
 						<div class="row no-padding"><em class="fa fa-xl fa-users color-teal"></em>
 							<div class="large">24</div>
-							<div class="text-muted">New Users</div>
+							<div class="text-muted">New admins</div>
 						</div>
 					</div>
 				</div>
@@ -115,7 +115,7 @@
 			<div class="col-xs-6 col-md-3">
 				<div class="panel panel-default">
 					<div class="panel-body easypiechart-panel">
-						<h4>New Users</h4>
+						<h4>New admins</h4>
 						<div class="easypiechart" id="easypiechart-teal" data-percent="56" ><span class="percent">56%</span></div>
 					</div>
 				</div>

@@ -18,16 +18,13 @@ include "includes/sidebar.php";
 				<h1 class="page-header">Users</h1>
 			</div>
 		</div><!--/.row-->
-
         <?php  
             if(!isset($_GET["action"])){
-                include("../admin/design/view.php");
+                include("../admin/design/admins/view.php");
             }elseif($_GET["action"] == "add"){
-                include("../admin/design/addtUser.php");
-
+                include("../admin/design/admins/addAdmin.php");
             }elseif($_GET["action"] == "edit"){
-                include("../admin/design/editUser.php");
-
+                include("../admin/design/admins/editAdmin.php");
             }
         
         ?>

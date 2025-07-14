@@ -404,21 +404,30 @@
 			<div class="w-size13 p-t-30 respon5">
 				<div class="wrap-slick3 flex-sb flex-w">
 					<div class="wrap-slick3-dots"></div>
-					<?php 
+						<?php 
 						include_once("admin/functions/connect.php");
 						$productId=$_GET["id"];
 						$select="SELECT *FROM products WHERE id= $productId";
 						$query=$conn->query($select);
 						$product=$query->fetch_assoc();
 					?>
-
 					<div class="slick3">
-						<div class="item-slick3" data-thumb="admin/images/<?= $product['img'] ?>">
-							<div class="wrap-pic-w">
-								<img src="images/product-detail-01.jpg" alt="IMG-PRODUCT">
-							</div>
-						</div>
-
+						<?php
+				            include_once("admin/functions/connect.php");
+	                        $productId=$_GET["id"];
+							$imgQuery = $conn->query("SELECT name FROM images WHERE product_id = $productId");
+							if ($imgQuery->num_rows > 0) {
+								while ($img = $imgQuery->fetch_assoc()) {
+									?>
+									<div class="item-slick3" data-thumb="admin/images/<?= $img['name'] ?>">
+										<div class="wrap-pic-w">
+											<img src="admin/images/<?= $img['name'] ?>" alt="IMG-PRODUCT">
+										</div>
+									</div>
+									<?php
+								}
+							}
+						    ?>	
 						<div class="item-slick3" data-thumb="images/thumb-item-02.jpg">
 							<div class="wrap-pic-w">
 								<img src="images/product-detail-02.jpg" alt="IMG-PRODUCT">
@@ -444,7 +453,7 @@
 				</span>
 
 				<p class="s-text8 p-t-10">
-                    <?= $product['img'] ?>	
+                    <?= $img['name'] ?>	
 				</p>
 
 				<!--  -->

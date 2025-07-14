@@ -1,4 +1,10 @@
-<form method="post" action="functions/users/addUser.php">
+
+<?php 
+
+
+?>
+
+<form method="post" action="functions/admins/addAdmin.php">
     <div class="form-group">
         <label for="exampleInputName1">Name</label>
         <input name="name" type="text" class="form-control" id="exampleInputName1" placeholder="Enter Name">
@@ -23,12 +29,16 @@
         </select>
     </div>
     <div class="form-check">
-        <input class="form-check-input position-static" type="checkbox" name="priv" id="admin" value="admin">
-        <label for="admin">Admin</label>
+        <input class="form-check-input position-static" type="radio" name="priv" id="owner" value="1">
+        <label for="owner">owner</label>
     </div>
     <div class="form-check">
-        <input class="form-check-input position-static" type="checkbox" name="priv" id="user" value="user">
-        <label for="user">User</label>
+        <input class="form-check-input position-static" type="radio" name="priv" id="Admin" value="2">
+        <label for="Admin">Admin</label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input position-static" type="radio" name="priv" id="user" value="3">
+        <label for="user">user</label>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
