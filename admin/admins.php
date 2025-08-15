@@ -20,11 +20,11 @@ include "includes/sidebar.php";
 		</div><!--/.row-->
         <?php  
             if(!isset($_GET["action"])){
-                include("../admin/design/admins/view.php");
+                include("design/admins/view.php");
             }elseif($_GET["action"] == "add"){
-                include("../admin/design/admins/addAdmin.php");
+                include("design/admins/addAdmin.php");
             }elseif($_GET["action"] == "edit"){
-                include("../admin/design/admins/editAdmin.php");
+                include("design/admins/editAdmin.php");
             }
         
         ?>

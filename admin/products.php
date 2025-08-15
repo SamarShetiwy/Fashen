@@ -21,12 +21,12 @@ include "includes/sidebar.php";
 
         <?php  
             if(!isset($_GET["action"])){
-                include("../admin/design/products/view.php");
+                include("design/products/view.php");
             }elseif($_GET["action"] == "add"){
-                include("../admin/design/products/add.php");
+                include("design/products/add.php");
 
             }elseif($_GET["action"] == "edit"){
-                include("../admin/design/products/edit.php");
+                include("design/products/edit.php");
 
             }
         
