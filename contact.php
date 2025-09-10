@@ -398,13 +398,12 @@
 						<h4 class="m-text26 p-b-36 p-t-15">
 							Send us your message
 						</h4>
-
 						<div class="bo4 of-hidden size15 m-b-20">
 							<input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="name" placeholder="Full Name">
 						</div>
 
 						<div class="bo4 of-hidden size15 m-b-20">
-							<input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="phone-number" placeholder="Phone Number">
+							<input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="phone" placeholder="Phone Number">
 						</div>
 
 						<div class="bo4 of-hidden size15 m-b-20">
@@ -420,6 +419,7 @@
 							</button>
 						</div>
 					</form>
+					<div class="newData"></div>
 				</div>
 			</div>
 		</div>
@@ -634,6 +634,7 @@
 	<script src="js/map-custom.js"></script>
 <!--===============================================================================================-->
 	<script src="js/main.js"></script>
+	<script src="js/ajax.js"></script>
 
 </body>
 </html>

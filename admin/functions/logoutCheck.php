@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("connect.php");
+include"connect.php";
 
 $token = $_SESSION['auth_token'] ?? $_COOKIE['auth_token'] ?? null;
 

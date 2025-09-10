@@ -14,7 +14,7 @@ $query=$conn->query($dataLogin);
 
 echo "<pre></pre>";
 
-if($query && $query->num_rows > 0){
+if( $query->num_rows > 0){
 
     $admin=$query->fetch_assoc();
     $id=$admin["id"];
